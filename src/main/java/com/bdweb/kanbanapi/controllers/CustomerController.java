@@ -3,7 +3,6 @@ package com.bdweb.kanbanapi.controllers;
 import com.bdweb.kanbanapi.dtos.CustomerRequest;
 import com.bdweb.kanbanapi.models.Customer;
 import com.bdweb.kanbanapi.services.CustomerService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +34,7 @@ public class CustomerController {
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable("id") UUID id,
                                                    @RequestBody CustomerRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(service.update(id, request));
