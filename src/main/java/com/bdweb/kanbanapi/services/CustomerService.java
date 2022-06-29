@@ -14,7 +14,8 @@ import java.util.UUID;
 @Service
 public class CustomerService {
 
-    private CustomerRepository repository;
+    private final CustomerRepository repository;
+
     public CustomerService(CustomerRepository customerRepository){
         this.repository = customerRepository;
     }
@@ -37,6 +38,7 @@ public class CustomerService {
         return repository.findById(id).get();
     }
 
+    @Transactional
     public Customer update(UUID id, CustomerRequest request) {
         Optional<Customer> customerOptional = repository.findById(id);
         Customer customer = new Customer();
@@ -47,7 +49,7 @@ public class CustomerService {
         customer.setPassword(request.getPassword());
         return repository.save(customer);
     }
-
+    @Transactional
     public void delete(UUID id) {
         repository.deleteById(id);
     }
