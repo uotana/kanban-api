@@ -21,8 +21,8 @@ public class Task {
     private String title;
 
     @ManyToOne
-    @JoinColumn(name="CUSTOMER_ID")
-    private Customer customer;
+    @JoinColumn(name="BOARD_ID")
+    private Board board;
 
     @Column(name="DESCRIPTION")
     private String description;
