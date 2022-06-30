@@ -8,8 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
-
 @RestController
 @RequestMapping("v1/tasks")
 public class TaskController {
@@ -19,10 +17,10 @@ public class TaskController {
         this.service = taskService;
     }
 
-    @PostMapping("/{customer-id}")
-    public ResponseEntity<Task> saveTask(@PathVariable("customer-id") UUID id,
+    @PostMapping("/{board-id}")
+    public ResponseEntity<Task> saveTask(@PathVariable("board-id") Long boardId,
                                          @RequestBody TaskRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(id, request));
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(boardId, request));
     }
 
     @GetMapping
