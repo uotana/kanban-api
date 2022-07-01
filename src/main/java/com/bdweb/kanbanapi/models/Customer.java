@@ -23,6 +23,8 @@ public class Customer {
     private String email;
     @Column(name = "PASSWORD", nullable = false)
     private String password;
-    @Column(name = "REGISTRATION_DATE")
+    @Column(name = "ROLE", nullable = false)
+    private String role;
+    @Column(name = "REGISTRATION_DATE", nullable = false)
     private ZonedDateTime registrationDate;
 }

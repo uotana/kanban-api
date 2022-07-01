@@ -25,6 +25,7 @@ public class CustomerService {
         Customer customer = new Customer();
         customer.setName(request.getName());
         customer.setEmail(request.getEmail());
+        customer.setRole("USER");
         customer.setPassword(request.getPassword());
         customer.setRegistrationDate(ZonedDateTime.now());
         return repository.save(customer);
@@ -44,6 +45,7 @@ public class CustomerService {
         Customer customer = new Customer();
         customer.setId(customerOptional.get().getId());
         customer.setRegistrationDate(customerOptional.get().getRegistrationDate());
+        customer.setRole(customerOptional.get().getRole());
         customer.setName(request.getName());
         customer.setEmail(request.getEmail());
         customer.setPassword(request.getPassword());
