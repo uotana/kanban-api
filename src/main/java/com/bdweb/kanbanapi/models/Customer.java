@@ -21,6 +21,8 @@ public class Customer {
     private String name;
     @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
+    @Column(name = "USERNAME", nullable = false, unique = true)
+    private String username;
     @Column(name = "PASSWORD", nullable = false)
     private String password;
     @Column(name = "ROLE", nullable = false)

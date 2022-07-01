@@ -25,6 +25,7 @@ public class CustomerService {
         Customer customer = new Customer();
         customer.setName(request.getName());
         customer.setEmail(request.getEmail());
+        customer.setUsername(request.getUsername());
         customer.setRole("USER");
         customer.setPassword(request.getPassword());
         customer.setRegistrationDate(ZonedDateTime.now());
@@ -46,6 +47,7 @@ public class CustomerService {
         customer.setId(customerOptional.get().getId());
         customer.setRegistrationDate(customerOptional.get().getRegistrationDate());
         customer.setRole(customerOptional.get().getRole());
+        customer.setUsername(request.getUsername());
         customer.setName(request.getName());
         customer.setEmail(request.getEmail());
         customer.setPassword(request.getPassword());
