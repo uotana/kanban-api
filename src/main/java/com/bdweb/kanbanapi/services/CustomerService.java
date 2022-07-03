@@ -2,22 +2,25 @@ package com.bdweb.kanbanapi.services;
 
 import com.bdweb.kanbanapi.dtos.CustomerRequest;
 import com.bdweb.kanbanapi.models.Customer;
+import com.bdweb.kanbanapi.models.Role;
 import com.bdweb.kanbanapi.repositories.CustomerRepository;
+import com.bdweb.kanbanapi.repositories.RoleRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class CustomerService {
 
     private final CustomerRepository repository;
+    private final RoleRepository roleRepository;
 
-    public CustomerService(CustomerRepository customerRepository){
+    public CustomerService(CustomerRepository customerRepository, RoleRepository roleRepository){
         this.repository = customerRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Transactional
@@ -26,7 +29,10 @@ public class CustomerService {
         customer.setName(request.getName());
         customer.setEmail(request.getEmail());
         customer.setUsername(request.getUsername());
-        customer.setRole("USER");
+        Set<Role> roles = new HashSet<>();
+        Optional<Role> roleOptional = roleRepository.findByName("USER");
+        roles.add(roleOptional.get());
+        customer.setRoles(roles);
         customer.setPassword(request.getPassword());
         customer.setRegistrationDate(ZonedDateTime.now());
         return repository.save(customer);
@@ -46,7 +52,7 @@ public class CustomerService {
         Customer customer = new Customer();
         customer.setId(customerOptional.get().getId());
         customer.setRegistrationDate(customerOptional.get().getRegistrationDate());
-        customer.setRole(customerOptional.get().getRole());
+        customer.setRoles(customerOptional.get().getRoles());
         customer.setUsername(request.getUsername());
         customer.setName(request.getName());
         customer.setEmail(request.getEmail());
