@@ -5,7 +5,7 @@ import com.bdweb.kanbanapi.models.Customer;
 import com.bdweb.kanbanapi.models.Role;
 import com.bdweb.kanbanapi.repositories.CustomerRepository;
 import com.bdweb.kanbanapi.repositories.RoleRepository;
-import org.springframework.beans.BeanUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -33,7 +33,7 @@ public class CustomerService {
         Optional<Role> roleOptional = roleRepository.findByName("USER");
         roles.add(roleOptional.get());
         customer.setRoles(roles);
-        customer.setPassword(request.getPassword());
+        customer.setPassword(new BCryptPasswordEncoder().encode(request.getPassword()));
         customer.setRegistrationDate(ZonedDateTime.now());
         return repository.save(customer);
     }
@@ -56,7 +56,7 @@ public class CustomerService {
         customer.setUsername(request.getUsername());
         customer.setName(request.getName());
         customer.setEmail(request.getEmail());
-        customer.setPassword(request.getPassword());
+        customer.setPassword(new BCryptPasswordEncoder().encode(request.getPassword()));
         return repository.save(customer);
     }
     @Transactional

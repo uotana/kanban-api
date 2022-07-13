@@ -19,7 +19,7 @@ public class CustomerController {
     public CustomerController(CustomerService customerService){
         this.service = customerService;
     }
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Customer> saveCustomer(@RequestBody CustomerRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(request));
     }
