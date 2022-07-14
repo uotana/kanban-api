@@ -3,6 +3,7 @@ package com.bdweb.kanbanapi.services;
 import com.bdweb.kanbanapi.dtos.requests.CustomerRequest;
 import com.bdweb.kanbanapi.dtos.responses.CustomerResponse;
 import com.bdweb.kanbanapi.exception.CustomerNotFoundException;
+import com.bdweb.kanbanapi.exception.RoleNotFoundException;
 import com.bdweb.kanbanapi.models.Customer;
 import com.bdweb.kanbanapi.models.Role;
 import com.bdweb.kanbanapi.repositories.CustomerRepository;
@@ -33,8 +34,8 @@ public class CustomerService {
         customer.setEmail(request.getEmail());
         customer.setUsername(request.getUsername());
         Set<Role> roles = new HashSet<>();
-        Optional<Role> roleOptional = roleRepository.findByName("USER");
-        roles.add(roleOptional.get());
+        Role role = roleRepository.findByName("USER").orElseThrow(() -> new RoleNotFoundException("Role USER not found"));;
+        roles.add(role);
         customer.setRoles(roles);
         customer.setPassword(new BCryptPasswordEncoder().encode(request.getPassword()));
         customer.setRegistrationDate(ZonedDateTime.now());
@@ -68,6 +69,7 @@ public class CustomerService {
 
     @Transactional
     public void delete(UUID id) {
+        repository.findById(id).orElseThrow(() -> new CustomerNotFoundException("Customer with id " + id + " not found"));
         repository.deleteById(id);
     }
 }
