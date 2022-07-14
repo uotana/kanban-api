@@ -2,6 +2,7 @@ package com.bdweb.kanbanapi.services;
 
 import com.bdweb.kanbanapi.dtos.CustomerRequest;
 import com.bdweb.kanbanapi.dtos.CustomerResponse;
+import com.bdweb.kanbanapi.exception.CustomerNotFoundException;
 import com.bdweb.kanbanapi.models.Customer;
 import com.bdweb.kanbanapi.models.Role;
 import com.bdweb.kanbanapi.repositories.CustomerRepository;
@@ -49,16 +50,14 @@ public class CustomerService {
     }
 
     public CustomerResponse findById(UUID id) {
-        return repository.findById(id).get().toResponse();
+        return repository.findById(id)
+                .orElseThrow(() -> new CustomerNotFoundException("Customer with id " + id + " not found")
+        ).toResponse();
     }
 
     @Transactional
     public CustomerResponse update(UUID id, CustomerRequest request) {
-        Optional<Customer> customerOptional = repository.findById(id);
-        Customer customer = new Customer();
-        customer.setId(customerOptional.get().getId());
-        customer.setRegistrationDate(customerOptional.get().getRegistrationDate());
-        customer.setRoles(customerOptional.get().getRoles());
+        Customer customer = repository.findById(id).orElseThrow(() -> new CustomerNotFoundException("Customer with id " + id + " not found"));
         customer.setUsername(request.getUsername());
         customer.setName(request.getName());
         customer.setEmail(request.getEmail());
