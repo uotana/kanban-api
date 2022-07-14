@@ -9,7 +9,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class KanbanExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<DefaultError> userNotFound(CustomerNotFoundException exception) {
+    public ResponseEntity<DefaultError> customerNotFound(CustomerNotFoundException exception) {
+        DefaultError error = new DefaultError(HttpStatus.BAD_REQUEST.value(),
+                exception.getMessage(),
+                System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<DefaultError> roleNotFound(RoleNotFoundException exception) {
         DefaultError error = new DefaultError(HttpStatus.BAD_REQUEST.value(),
                 exception.getMessage(),
                 System.currentTimeMillis());
