@@ -1,4 +1,4 @@
-package com.bdweb.kanbanapi.dtos;
+package com.bdweb.kanbanapi.dtos.responses;
 
 import com.bdweb.kanbanapi.models.Role;
 import lombok.Getter;

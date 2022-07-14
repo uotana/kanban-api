@@ -1,6 +1,6 @@
 package com.bdweb.kanbanapi.controllers;
 
-import com.bdweb.kanbanapi.dtos.CustomerResponse;
+import com.bdweb.kanbanapi.dtos.responses.CustomerResponse;
 import com.bdweb.kanbanapi.services.AdminService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

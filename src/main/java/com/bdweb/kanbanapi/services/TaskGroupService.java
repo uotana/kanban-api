@@ -1,6 +1,6 @@
 package com.bdweb.kanbanapi.services;
 
-import com.bdweb.kanbanapi.dtos.TaskGroupRequest;
+import com.bdweb.kanbanapi.dtos.requests.TaskGroupRequest;
 import com.bdweb.kanbanapi.models.TaskGroup;
 import com.bdweb.kanbanapi.repositories.TaskGroupRepository;
 import org.springframework.stereotype.Service;

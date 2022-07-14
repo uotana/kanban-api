@@ -1,4 +1,4 @@
-package com.bdweb.kanbanapi.dtos;
+package com.bdweb.kanbanapi.dtos.responses;
 
 import lombok.Builder;
 import lombok.Getter;

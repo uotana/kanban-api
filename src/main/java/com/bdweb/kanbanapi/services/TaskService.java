@@ -1,6 +1,6 @@
 package com.bdweb.kanbanapi.services;
 
-import com.bdweb.kanbanapi.dtos.TaskRequest;
+import com.bdweb.kanbanapi.dtos.requests.TaskRequest;
 import com.bdweb.kanbanapi.models.Board;
 import com.bdweb.kanbanapi.models.Task;
 import com.bdweb.kanbanapi.repositories.BoardRepository;

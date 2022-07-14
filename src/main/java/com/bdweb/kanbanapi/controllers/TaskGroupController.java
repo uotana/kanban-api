@@ -1,6 +1,6 @@
 package com.bdweb.kanbanapi.controllers;
 
-import com.bdweb.kanbanapi.dtos.TaskGroupRequest;
+import com.bdweb.kanbanapi.dtos.requests.TaskGroupRequest;
 import com.bdweb.kanbanapi.models.TaskGroup;
 import com.bdweb.kanbanapi.services.TaskGroupService;
 import org.springframework.http.HttpStatus;

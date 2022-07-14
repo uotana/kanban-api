@@ -1,7 +1,7 @@
 package com.bdweb.kanbanapi.controllers;
 
-import com.bdweb.kanbanapi.dtos.AuthRequest;
-import com.bdweb.kanbanapi.dtos.AuthResponse;
+import com.bdweb.kanbanapi.dtos.requests.AuthRequest;
+import com.bdweb.kanbanapi.dtos.responses.AuthResponse;
 import com.bdweb.kanbanapi.services.UserDetailsServiceImpl;
 import com.bdweb.kanbanapi.utils.TokenUtil;
 import org.springframework.http.ResponseEntity;

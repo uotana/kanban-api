@@ -1,6 +1,6 @@
 package com.bdweb.kanbanapi.services;
 
-import com.bdweb.kanbanapi.dtos.BoardRequest;
+import com.bdweb.kanbanapi.dtos.requests.BoardRequest;
 import com.bdweb.kanbanapi.exception.BoardNotFoundException;
 import com.bdweb.kanbanapi.exception.CustomerNotFoundException;
 import com.bdweb.kanbanapi.models.Board;

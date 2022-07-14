@@ -1,4 +1,4 @@
-package com.bdweb.kanbanapi.dtos;
+package com.bdweb.kanbanapi.dtos.requests;
 
 import lombok.Getter;
 import lombok.Setter;

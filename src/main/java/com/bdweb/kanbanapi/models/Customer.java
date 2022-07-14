@@ -1,6 +1,6 @@
 package com.bdweb.kanbanapi.models;
 
-import com.bdweb.kanbanapi.dtos.CustomerResponse;
+import com.bdweb.kanbanapi.dtos.responses.CustomerResponse;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;

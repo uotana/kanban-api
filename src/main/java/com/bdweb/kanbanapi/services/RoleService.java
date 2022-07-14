@@ -1,6 +1,6 @@
 package com.bdweb.kanbanapi.services;
 
-import com.bdweb.kanbanapi.dtos.RoleRequest;
+import com.bdweb.kanbanapi.dtos.requests.RoleRequest;
 import com.bdweb.kanbanapi.exception.RoleNotFoundException;
 import com.bdweb.kanbanapi.models.Role;
 import com.bdweb.kanbanapi.repositories.RoleRepository;

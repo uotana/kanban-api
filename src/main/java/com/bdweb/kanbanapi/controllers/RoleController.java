@@ -1,9 +1,8 @@
 package com.bdweb.kanbanapi.controllers;
 
-import com.bdweb.kanbanapi.dtos.RoleRequest;
+import com.bdweb.kanbanapi.dtos.requests.RoleRequest;
 import com.bdweb.kanbanapi.models.Role;
 import com.bdweb.kanbanapi.services.RoleService;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

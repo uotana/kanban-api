@@ -1,6 +1,6 @@
 package com.bdweb.kanbanapi.controllers;
 
-import com.bdweb.kanbanapi.dtos.BoardRequest;
+import com.bdweb.kanbanapi.dtos.requests.BoardRequest;
 import com.bdweb.kanbanapi.models.Board;
 import com.bdweb.kanbanapi.services.BoardService;
 import org.springframework.http.HttpStatus;

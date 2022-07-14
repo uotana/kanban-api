@@ -1,7 +1,7 @@
 package com.bdweb.kanbanapi.services;
 
-import com.bdweb.kanbanapi.dtos.CustomerRequest;
-import com.bdweb.kanbanapi.dtos.CustomerResponse;
+import com.bdweb.kanbanapi.dtos.requests.CustomerRequest;
+import com.bdweb.kanbanapi.dtos.responses.CustomerResponse;
 import com.bdweb.kanbanapi.exception.CustomerNotFoundException;
 import com.bdweb.kanbanapi.models.Customer;
 import com.bdweb.kanbanapi.models.Role;
