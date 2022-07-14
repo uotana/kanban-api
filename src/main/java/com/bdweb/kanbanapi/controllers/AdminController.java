@@ -1,7 +1,6 @@
 package com.bdweb.kanbanapi.controllers;
 
-import com.bdweb.kanbanapi.dtos.RoleRequest;
-import com.bdweb.kanbanapi.models.Customer;
+import com.bdweb.kanbanapi.dtos.CustomerResponse;
 import com.bdweb.kanbanapi.services.AdminService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +19,8 @@ public class AdminController {
     }
 
     @PutMapping("update-customer/{customer-id}/role/{role-id}")
-    public ResponseEntity<Customer> updateCustomerRoles(@PathVariable("customer-id") UUID customerId,
-                                                        @PathVariable("role-id") Long roleId) {
+    public ResponseEntity<CustomerResponse> updateCustomerRoles(@PathVariable("customer-id") UUID customerId,
+                                                                @PathVariable("role-id") Long roleId) {
         return ResponseEntity.status(HttpStatus.OK).body(service.updateCustomerRoles(customerId, roleId));
 
     }

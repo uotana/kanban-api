@@ -1,5 +1,6 @@
 package com.bdweb.kanbanapi.models;
 
+import com.bdweb.kanbanapi.dtos.CustomerResponse;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
@@ -58,5 +59,16 @@ public class Customer implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public CustomerResponse toResponse() {
+        CustomerResponse response = new CustomerResponse();
+        response.setId(this.getId());
+        response.setName(this.getName());
+        response.setEmail(this.getEmail());
+        response.setUsername(this.getUsername());
+        response.setRegistrationDate(this.getRegistrationDate());
+        response.setRoles(this.getRoles());
+        return response;
     }
 }
