@@ -30,7 +30,7 @@ public class Customer implements UserDetails {
     private String username;
     @Column(name = "PASSWORD", nullable = false)
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.DETACH}, fetch = FetchType.EAGER)
     @Column(name = "ROLE", nullable = false)
     private Set<Role> roles;
     @Column(name = "REGISTRATION_DATE", nullable = false)
