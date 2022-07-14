@@ -1,6 +1,7 @@
 package com.bdweb.kanbanapi.services;
 
 import com.bdweb.kanbanapi.dtos.requests.BoardRequest;
+import com.bdweb.kanbanapi.dtos.responses.BoardResponse;
 import com.bdweb.kanbanapi.exception.BoardNotFoundException;
 import com.bdweb.kanbanapi.exception.CustomerNotFoundException;
 import com.bdweb.kanbanapi.models.Board;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class BoardService {
@@ -24,27 +26,29 @@ public class BoardService {
         this.customerRepository = customerRepository;
     }
 
-    public Board save(UUID id, BoardRequest request) {
+    public BoardResponse save(UUID id, BoardRequest request) {
         Customer customer = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException("Customer with id " + id + " not found"));
         Board board = new Board();
         board.setName(request.getName());
         board.setCustomer(customer);
         board.setRegistrationDate(ZonedDateTime.now());
-        return boardRepository.save(board);
+        return boardRepository.save(board).toResponse();
     }
 
-    public List<Board> findAll() {
-        return boardRepository.findAll();
+    public List<BoardResponse> findAll() {
+        return boardRepository.findAll()
+                .stream()
+                .map(board -> board.toResponse()).collect(Collectors.toList());
     }
 
-    public Board findById(Long id) {
-        return boardRepository.findById(id).orElseThrow(() -> new BoardNotFoundException("Board with id " + id + " not found"));
+    public BoardResponse findById(Long id) {
+        return boardRepository.findById(id).orElseThrow(() -> new BoardNotFoundException("Board with id " + id + " not found")).toResponse();
     }
 
-    public Board update(Long id, BoardRequest request) {
+    public BoardResponse update(Long id, BoardRequest request) {
         Board board = boardRepository.findById(id).orElseThrow(() -> new BoardNotFoundException("Board with id " + id + " not found"));
         board.setName(request.getName());
-        return boardRepository.save(board);
+        return boardRepository.save(board).toResponse();
     }
 
     public void delete(Long id) {

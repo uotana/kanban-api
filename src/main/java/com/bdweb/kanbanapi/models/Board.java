@@ -1,5 +1,6 @@
 package com.bdweb.kanbanapi.models;
 
+import com.bdweb.kanbanapi.dtos.responses.BoardResponse;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
@@ -27,4 +28,13 @@ public class Board {
 
     @Column(name = "REGISTRATION_DATE")
     private ZonedDateTime registrationDate;
+
+    public BoardResponse toResponse(){
+        BoardResponse response = new BoardResponse();
+        response.setId(this.getId());
+        response.setName(this.getName());
+        response.setRegistrationDate(this.getRegistrationDate());
+        response.setCustomer(this.getCustomer().toResponse());
+        return response;
+    }
 }

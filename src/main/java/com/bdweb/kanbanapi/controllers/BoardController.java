@@ -1,6 +1,7 @@
 package com.bdweb.kanbanapi.controllers;
 
 import com.bdweb.kanbanapi.dtos.requests.BoardRequest;
+import com.bdweb.kanbanapi.dtos.responses.BoardResponse;
 import com.bdweb.kanbanapi.models.Board;
 import com.bdweb.kanbanapi.services.BoardService;
 import org.springframework.http.HttpStatus;
@@ -20,23 +21,23 @@ public class BoardController {
         this.service = boardService;
     }
     @PostMapping("/{id}")
-    public ResponseEntity<Board> saveBoard(@PathVariable("id") UUID id,
+    public ResponseEntity<BoardResponse> saveBoard(@PathVariable("id") UUID id,
                                            @RequestBody BoardRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(id, request));
     }
 
     @GetMapping
-    public ResponseEntity<List<Board>> findAllBoards(){
+    public ResponseEntity<List<BoardResponse>> findAllBoards(){
         return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Board> findBoardById(@PathVariable("id") Long id) {
+    public ResponseEntity<BoardResponse> findBoardById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Board> updateBoard(@PathVariable("id") Long id,
+    public ResponseEntity<BoardResponse> updateBoard(@PathVariable("id") Long id,
                                                    @RequestBody BoardRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(service.update(id, request));
 
