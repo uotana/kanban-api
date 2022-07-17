@@ -23,7 +23,7 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.boot:spring-security-test'
+    testImplementation group: 'org.springframework.security', name: 'spring-security-test', version: '5.7.2'
     testImplementation 'com.h2database:h2'
 }
 
