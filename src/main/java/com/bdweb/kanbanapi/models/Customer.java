@@ -3,8 +3,7 @@ package com.bdweb.kanbanapi.models;
 import com.bdweb.kanbanapi.dtos.responses.CustomerResponse;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -17,6 +16,7 @@ import java.util.UUID;
 @Entity(name = "CUSTOMER")
 @Getter
 @Setter
+@ToString
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Customer implements UserDetails {
     @Id
