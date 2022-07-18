@@ -1,9 +1,10 @@
 package com.bdweb.kanbanapi.services;
 
 import com.bdweb.kanbanapi.dtos.requests.TaskRequest;
-import com.bdweb.kanbanapi.models.Board;
+import com.bdweb.kanbanapi.exception.TaskGroupNotFoundException;
 import com.bdweb.kanbanapi.models.Task;
-import com.bdweb.kanbanapi.repositories.BoardRepository;
+import com.bdweb.kanbanapi.models.TaskGroup;
+import com.bdweb.kanbanapi.repositories.TaskGroupRepository;
 import com.bdweb.kanbanapi.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,21 +17,22 @@ import java.util.Optional;
 public class TaskService {
 
     public final TaskRepository taskRepository;
-    public final BoardRepository boardRepository;
+    public final TaskGroupRepository taskGroupRepository;
 
-    public TaskService(TaskRepository taskRepository, BoardRepository boardRepository) {
+    public TaskService(TaskRepository taskRepository, TaskGroupRepository taskGroupRepository) {
         this.taskRepository = taskRepository;
-        this.boardRepository = boardRepository;
+        this.taskGroupRepository = taskGroupRepository;
     }
 
     @Transactional
     public Task save(Long id, TaskRequest request) {
+        TaskGroup taskGroup = taskGroupRepository.findById(id)
+                .orElseThrow(() -> new TaskGroupNotFoundException("Task group with id " + id + " not found"));
         Task task = new Task();
-        Optional<Board> boardOptional = boardRepository.findById(id);
         task.setTitle(request.getTitle());
         task.setDescription(request.getDescription());
         task.setRegistrationDate(ZonedDateTime.now());
-        task.setBoard(boardOptional.get());
+        task.setTaskGroup(taskGroup);
         return taskRepository.save(task);
     }
 
@@ -48,7 +50,7 @@ public class TaskService {
         Task task = new Task();
         task.setTitle(request.getTitle());
         task.setDescription(request.getDescription());
-        task.setBoard(taskOptional.get().getBoard());
+        task.setTaskGroup(task.getTaskGroup());
         task.setId(taskOptional.get().getId());
         task.setRegistrationDate(taskOptional.get().getRegistrationDate());
         return taskRepository.save(task);
