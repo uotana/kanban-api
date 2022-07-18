@@ -36,7 +36,6 @@ public class AuthFilter extends OncePerRequestFilter {
 
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             jwt = requestTokenHeader.substring(7);
-            System.out.println(requestTokenHeader);
             try {
                 username = tokenUtil.getUsernameFromToken(jwt);
             } catch (IllegalArgumentException e) {
