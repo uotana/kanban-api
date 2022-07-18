@@ -35,13 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        System.out.println("configure");
         http.csrf().disable()
                 .authorizeRequests()
-//                .antMatchers("/v1/**").permitAll()
                 .antMatchers("/v1/auth", "/v1/customers/save").permitAll()
-//                .antMatchers("/v1/customers/{id}", "/v1/boards/**", "/v1/tasks/**").access("hasAnyRole('ADMIN', 'USER')")
-//                .antMatchers("/v1/customers", "/v1/roles/**", "/v1/admin/**" ).access("hasRole('USER')")
+//                .antMatchers("/v1/customers/{id}", "/v1/boards/{customer-id}", "/v1/tasks/{board-id}").access("hasAuthority('USER')")
+                .antMatchers("/v1/customers", "/v1/roles/**", "/v1/admin/**" ).access("hasAuthority('ADMIN')")
                 .anyRequest().authenticated().and()
                 .exceptionHandling().authenticationEntryPoint(authEntryPoint)
                 .and().sessionManagement()
