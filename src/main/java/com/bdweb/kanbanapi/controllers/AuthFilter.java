@@ -31,12 +31,10 @@ public class AuthFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         final String requestTokenHeader = request.getHeader("Authorization");
-        System.out.println("requestTokenHeader: "+ requestTokenHeader);
         String jwt = null;
         String username = null;
 
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-            logger.info("Token is a Bearer");
             jwt = requestTokenHeader.substring(7);
             System.out.println(requestTokenHeader);
             try {
@@ -51,12 +49,8 @@ public class AuthFilter extends OncePerRequestFilter {
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            logger.info("username != null");
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            System.out.println("userDetails: " + userDetails.toString());
-            System.out.println("userDetails authorities: "+ userDetails.getAuthorities().toString());
             if (tokenUtil.validateToken(jwt, userDetails)) {
-                logger.info("Token is valid");
                 UsernamePasswordAuthenticationToken userToken =
                         new UsernamePasswordAuthenticationToken(
                                 userDetails, null, userDetails.getAuthorities()
