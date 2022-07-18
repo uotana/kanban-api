@@ -2,7 +2,6 @@ package com.bdweb.kanbanapi.controllers;
 
 import com.bdweb.kanbanapi.dtos.requests.TaskGroupRequest;
 import com.bdweb.kanbanapi.dtos.responses.TaskGroupResponse;
-import com.bdweb.kanbanapi.models.TaskGroup;
 import com.bdweb.kanbanapi.services.TaskGroupService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,7 @@ public class TaskGroupController {
     }
 
     @PostMapping("/{board-id}")
-    public ResponseEntity<TaskGroup> saveGroup(@PathVariable("board-id") Long boardId,
+    public ResponseEntity<TaskGroupResponse> saveGroup(@PathVariable("board-id") Long boardId,
                                                @RequestBody TaskGroupRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(boardId, request));
     }
@@ -32,12 +31,12 @@ public class TaskGroupController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TaskGroup> findGroupById(@PathVariable("id") Long id) {
+    public ResponseEntity<TaskGroupResponse> findGroupById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TaskGroup> updateGroup(@PathVariable("id") Long id,
+    public ResponseEntity<TaskGroupResponse> updateGroup(@PathVariable("id") Long id,
                                                  @RequestBody TaskGroupRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(service.update(id, request));
 

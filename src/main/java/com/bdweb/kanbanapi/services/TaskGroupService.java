@@ -26,12 +26,12 @@ public class TaskGroupService {
     }
 
     @Transactional
-    public TaskGroup save(Long boardId, TaskGroupRequest request) {
+    public TaskGroupResponse save(Long boardId, TaskGroupRequest request) {
         Board board = boardRepository.findById(boardId).orElseThrow(() -> new BoardNotFoundException("Board with id " + boardId + " not found"));
         TaskGroup group = new TaskGroup();
         group.setName(request.getName());
         group.setBoard(board);
-        return taskGroupRepository.save(group);
+        return taskGroupRepository.save(group).toResponse();
     }
 
     public List<TaskGroupResponse> findAll() {
@@ -39,17 +39,18 @@ public class TaskGroupService {
                 .stream().map(taskGroup -> taskGroup.toResponse()).collect(Collectors.toList());
     }
 
-    public TaskGroup findById(Long id) {
-        return taskGroupRepository.findById(id).get();
+    public TaskGroupResponse findById(Long id) {
+        return taskGroupRepository.findById(id).get().toResponse();
     }
 
     @Transactional
-    public TaskGroup update(Long id, TaskGroupRequest request) {
+    public TaskGroupResponse update(Long id, TaskGroupRequest request) {
         Optional<TaskGroup> statusOptional = taskGroupRepository.findById(id);
         TaskGroup status = new TaskGroup();
         status.setId(statusOptional.get().getId());
+        status.setBoard(statusOptional.get().getBoard());
         status.setName(request.getName());
-        return taskGroupRepository.save(status);
+        return taskGroupRepository.save(status).toResponse();
     }
 
     @Transactional
