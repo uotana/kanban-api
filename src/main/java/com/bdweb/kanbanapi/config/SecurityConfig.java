@@ -1,7 +1,7 @@
 package com.bdweb.kanbanapi.config;
 
 import com.bdweb.kanbanapi.controllers.AuthEntryPoint;
-import com.bdweb.kanbanapi.controllers.AuthFilter;
+import com.bdweb.kanbanapi.filters.AuthFilter;
 import com.bdweb.kanbanapi.services.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;

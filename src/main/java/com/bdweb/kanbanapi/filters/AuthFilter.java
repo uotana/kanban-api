@@ -1,4 +1,4 @@
-package com.bdweb.kanbanapi.controllers;
+package com.bdweb.kanbanapi.filters;
 
 import com.bdweb.kanbanapi.services.UserDetailsServiceImpl;
 import com.bdweb.kanbanapi.utils.TokenUtil;
