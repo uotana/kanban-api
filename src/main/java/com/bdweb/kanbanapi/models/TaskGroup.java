@@ -1,5 +1,7 @@
 package com.bdweb.kanbanapi.models;
 
+import com.bdweb.kanbanapi.dtos.responses.CustomerResponse;
+import com.bdweb.kanbanapi.dtos.responses.TaskGroupResponse;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
@@ -22,4 +24,12 @@ public class TaskGroup {
     @ManyToOne
     @JoinColumn(name="BOARD_ID")
     private Board board;
+
+    public TaskGroupResponse toResponse() {
+        TaskGroupResponse response = new TaskGroupResponse();
+        response.setId(this.getId());
+        response.setName(this.getName());
+        response.setBoard(this.board.toResponse());
+        return response;
+    }
 }

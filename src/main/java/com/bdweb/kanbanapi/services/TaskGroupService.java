@@ -1,6 +1,7 @@
 package com.bdweb.kanbanapi.services;
 
 import com.bdweb.kanbanapi.dtos.requests.TaskGroupRequest;
+import com.bdweb.kanbanapi.dtos.responses.TaskGroupResponse;
 import com.bdweb.kanbanapi.exception.BoardNotFoundException;
 import com.bdweb.kanbanapi.models.Board;
 import com.bdweb.kanbanapi.models.TaskGroup;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskGroupService {
@@ -32,8 +34,9 @@ public class TaskGroupService {
         return taskGroupRepository.save(group);
     }
 
-    public List<TaskGroup> findAll() {
-        return taskGroupRepository.findAll();
+    public List<TaskGroupResponse> findAll() {
+        return taskGroupRepository.findAll()
+                .stream().map(taskGroup -> taskGroup.toResponse()).collect(Collectors.toList());
     }
 
     public TaskGroup findById(Long id) {
