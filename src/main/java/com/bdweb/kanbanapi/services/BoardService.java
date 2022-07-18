@@ -41,6 +41,13 @@ public class BoardService {
                 .map(board -> board.toResponse()).collect(Collectors.toList());
     }
 
+    public List<BoardResponse> findAllByCustomerId(UUID customerId) {
+        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new CustomerNotFoundException("Customer with id " + customerId + " not found"));
+        return boardRepository.findAllByCustomerId(customerId)
+                .stream()
+                .map(board -> board.toResponse()).collect(Collectors.toList());
+    }
+
     public BoardResponse findById(Long id) {
         return boardRepository.findById(id).orElseThrow(() -> new BoardNotFoundException("Board with id " + id + " not found")).toResponse();
     }

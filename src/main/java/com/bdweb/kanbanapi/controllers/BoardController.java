@@ -26,6 +26,11 @@ public class BoardController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(customerId, request));
     }
 
+    @GetMapping("/all/{customer-id}")
+    public ResponseEntity<List<BoardResponse>> findAllBoardsByCustomerId(@PathVariable("customer-id") UUID customerId){
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAllByCustomerId(customerId));
+    }
+
     @GetMapping
     public ResponseEntity<List<BoardResponse>> findAllBoards(){
         return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
