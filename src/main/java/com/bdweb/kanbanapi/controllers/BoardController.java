@@ -2,7 +2,6 @@ package com.bdweb.kanbanapi.controllers;
 
 import com.bdweb.kanbanapi.dtos.requests.BoardRequest;
 import com.bdweb.kanbanapi.dtos.responses.BoardResponse;
-import com.bdweb.kanbanapi.models.Board;
 import com.bdweb.kanbanapi.services.BoardService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +19,11 @@ public class BoardController {
     public BoardController(BoardService boardService){
         this.service = boardService;
     }
-    @PostMapping("/{id}")
-    public ResponseEntity<BoardResponse> saveBoard(@PathVariable("id") UUID id,
+
+    @PostMapping("/{customer-id}")
+    public ResponseEntity<BoardResponse> saveBoard(@PathVariable("customer-id") UUID customerId,
                                            @RequestBody BoardRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(id, request));
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(customerId, request));
     }
 
     @GetMapping
