@@ -18,4 +18,8 @@ public class TaskGroup {
 
     @Column(name="NAME")
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name="BOARD_ID")
+    private Board board;
 }

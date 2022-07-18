@@ -19,9 +19,10 @@ public class TaskGroupController {
         this.service = taskGroupService;
     }
 
-    @PostMapping
-    public ResponseEntity<TaskGroup> saveGroup(@RequestBody TaskGroupRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(request));
+    @PostMapping("/{board-id}")
+    public ResponseEntity<TaskGroup> saveGroup(@PathVariable("board-id") Long boardId,
+                                               @RequestBody TaskGroupRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(boardId, request));
     }
 
     @GetMapping
