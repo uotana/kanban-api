@@ -1,5 +1,6 @@
 package com.bdweb.kanbanapi.models;
 
+import com.bdweb.kanbanapi.dtos.responses.TaskResponse;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
@@ -29,4 +30,14 @@ public class Task {
 
     @Column(name = "REGISTRATION_DATE")
     private ZonedDateTime registrationDate;
+
+    public TaskResponse toResponse(){
+        TaskResponse response = new TaskResponse();
+        response.setId(this.id);
+        response.setTitle(this.title);
+        response.setDescription(this.description);
+        response.setTaskGroup(this.taskGroup.toResponse());
+        response.setRegistrationDate(this.registrationDate);
+        return response;
+    }
 }
