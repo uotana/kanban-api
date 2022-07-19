@@ -45,6 +45,6 @@ public class TaskGroupController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteGroup(@PathVariable("id") Long id) {
         service.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Task status deleted successfully.");
+        return ResponseEntity.status(HttpStatus.OK).body("Task group deleted successfully.");
     }
 }
