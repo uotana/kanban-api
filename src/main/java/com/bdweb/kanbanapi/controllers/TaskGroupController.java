@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/tasks-groups")
+@RequestMapping("v1/task-groups")
 public class TaskGroupController {
 
     private final TaskGroupService service;
@@ -23,6 +23,11 @@ public class TaskGroupController {
     public ResponseEntity<TaskGroupResponse> saveGroup(@PathVariable("board-id") Long boardId,
                                                @RequestBody TaskGroupRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(boardId, request));
+    }
+
+    @GetMapping("/all/board/{board-id}")
+    public ResponseEntity<List<TaskGroupResponse>> findAllTaskGroupsByBoardId(@PathVariable("board-id") Long boardId){
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAllByBoardId(boardId));
     }
 
     @GetMapping

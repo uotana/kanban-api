@@ -41,6 +41,11 @@ public class TaskGroupService {
                 .stream().map(taskGroup -> taskGroup.toResponse()).collect(Collectors.toList());
     }
 
+    public List<TaskGroupResponse> findAllByBoardId(Long boardId) {
+        return taskGroupRepository.findAllByBoardId(boardId)
+                .stream().map(taskGroup -> taskGroup.toResponse()).collect(Collectors.toList());
+    }
+
     public TaskGroupResponse findById(Long id) {
         return taskGroupRepository.findById(id).orElseThrow(() -> new TaskGroupNotFoundException("Task group with id " + id + " not found")).toResponse();
     }
