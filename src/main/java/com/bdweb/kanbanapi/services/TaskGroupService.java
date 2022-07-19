@@ -5,9 +5,11 @@ import com.bdweb.kanbanapi.dtos.responses.TaskGroupResponse;
 import com.bdweb.kanbanapi.exception.BoardNotFoundException;
 import com.bdweb.kanbanapi.exception.TaskGroupNotFoundException;
 import com.bdweb.kanbanapi.models.Board;
+import com.bdweb.kanbanapi.models.Task;
 import com.bdweb.kanbanapi.models.TaskGroup;
 import com.bdweb.kanbanapi.repositories.BoardRepository;
 import com.bdweb.kanbanapi.repositories.TaskGroupRepository;
+import com.bdweb.kanbanapi.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -18,10 +20,12 @@ import java.util.stream.Collectors;
 @Service
 public class TaskGroupService {
 
+    public final TaskRepository taskRepository;
     private final TaskGroupRepository taskGroupRepository;
     private final BoardRepository boardRepository;
 
-    public TaskGroupService(TaskGroupRepository taskGroupRepository, BoardRepository boardRepository){
+    public TaskGroupService(TaskRepository taskRepository, TaskGroupRepository taskGroupRepository, BoardRepository boardRepository){
+        this.taskRepository = taskRepository;
         this.taskGroupRepository = taskGroupRepository;
         this.boardRepository = boardRepository;
     }
@@ -61,7 +65,11 @@ public class TaskGroupService {
 
     @Transactional
     public void delete(Long id) {
-        taskGroupRepository.findById(id).orElseThrow(() -> new TaskGroupNotFoundException("Task group with id " + id + " not found"));
+        TaskGroup taskGroup = taskGroupRepository.findById(id).orElseThrow(() -> new TaskGroupNotFoundException("Task group with id " + id + " not found"));
+        List<Task> allTasks = taskRepository.findAllByTaskGroupId(taskGroup.getId());
+        List<Object> nullTasks = allTasks.stream().map(task -> {
+            taskRepository.deleteById(task.getId());
+            return null;}).collect(Collectors.toList());
         taskGroupRepository.deleteById(id);
     }
 }
