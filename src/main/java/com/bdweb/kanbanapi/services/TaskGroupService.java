@@ -11,6 +11,7 @@ import com.bdweb.kanbanapi.repositories.TaskGroupRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +32,7 @@ public class TaskGroupService {
         TaskGroup group = new TaskGroup();
         group.setName(request.getName());
         group.setBoard(board);
+        group.setRegistrationDate(ZonedDateTime.now());
         return taskGroupRepository.save(group).toResponse();
     }
 
