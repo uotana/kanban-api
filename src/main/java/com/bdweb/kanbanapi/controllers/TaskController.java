@@ -1,7 +1,7 @@
 package com.bdweb.kanbanapi.controllers;
 
 import com.bdweb.kanbanapi.dtos.requests.TaskRequest;
-import com.bdweb.kanbanapi.models.Task;
+import com.bdweb.kanbanapi.dtos.responses.TaskResponse;
 import com.bdweb.kanbanapi.services.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,24 +17,24 @@ public class TaskController {
         this.service = taskService;
     }
 
-    @PostMapping("/{board-id}")
-    public ResponseEntity<Task> saveTask(@PathVariable("board-id") Long boardId,
-                                         @RequestBody TaskRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(boardId, request));
+    @PostMapping("/{task-group-id}")
+    public ResponseEntity<TaskResponse> saveTask(@PathVariable("task-group-id") Long taskGroupId,
+                                                 @RequestBody TaskRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(taskGroupId, request));
     }
 
     @GetMapping
-    public ResponseEntity<List<Task>> findAllTasks(){
+    public ResponseEntity<List<TaskResponse>> findAllTasks(){
         return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Task> findTaskById(@PathVariable("id") Long id) {
+    public ResponseEntity<TaskResponse> findTaskById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Task> updateTask(@PathVariable("id") Long id,
+    public ResponseEntity<TaskResponse> updateTask(@PathVariable("id") Long id,
                                                    @RequestBody TaskRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(service.update(id, request));
 
