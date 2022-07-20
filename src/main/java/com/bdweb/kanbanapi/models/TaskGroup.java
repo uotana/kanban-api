@@ -10,6 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
+import java.util.Set;
 
 @Entity(name="TASK_GROUP")
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
@@ -27,6 +28,10 @@ public class TaskGroup {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name="BOARD_ID")
     private Board board;
+
+    @OneToMany(cascade = {CascadeType.DETACH})
+    @JoinColumn(name="TASK")
+    private Set<Task> task;
 
     @Column(name = "REGISTRATION_DATE")
     private ZonedDateTime registrationDate;

@@ -65,11 +65,7 @@ public class TaskGroupService {
 
     @Transactional
     public void delete(Long id) {
-        TaskGroup taskGroup = taskGroupRepository.findById(id).orElseThrow(() -> new TaskGroupNotFoundException("Task group with id " + id + " not found"));
-        List<Task> allTasks = taskRepository.findAllByTaskGroupId(taskGroup.getId());
-        List<Object> nullTasks = allTasks.stream().map(task -> {
-            taskRepository.deleteById(task.getId());
-            return null;}).collect(Collectors.toList());
+        taskGroupRepository.findById(id).orElseThrow(() -> new TaskGroupNotFoundException("Task group with id " + id + " not found"));
         taskGroupRepository.deleteById(id);
     }
 }
