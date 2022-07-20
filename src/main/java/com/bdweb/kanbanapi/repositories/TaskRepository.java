@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
-
     List<Task> findAllByTaskGroupId(Long id);
 }

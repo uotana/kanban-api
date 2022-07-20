@@ -23,6 +23,11 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(taskGroupId, request));
     }
 
+    @GetMapping("/all/task-group-id/{task-group-id}")
+    public ResponseEntity<List<TaskResponse>> findAllTasksByTaskGroupId(@PathVariable("task-group-id") Long taskGroupId){
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAllByTaskGroupId(taskGroupId));
+    }
+
     @GetMapping
     public ResponseEntity<List<TaskResponse>> findAllTasks(){
         return ResponseEntity.status(HttpStatus.OK).body(service.findAll());

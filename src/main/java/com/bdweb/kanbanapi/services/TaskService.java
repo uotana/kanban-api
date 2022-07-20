@@ -38,6 +38,15 @@ public class TaskService {
         return taskRepository.save(task).toResponse();
     }
 
+    public List<TaskResponse> findAllByTaskGroupId(Long taskGroupId) {
+        taskGroupRepository.findById(taskGroupId)
+                .orElseThrow(() -> new TaskGroupNotFoundException("Task group with id " + taskGroupId + " not found"));
+        return taskRepository.findAllByTaskGroupId(taskGroupId)
+                .stream()
+                .map(task -> task.toResponse())
+                .collect(Collectors.toList());
+    }
+
     public List<TaskResponse> findAll() {
         return taskRepository.findAll()
                 .stream()
