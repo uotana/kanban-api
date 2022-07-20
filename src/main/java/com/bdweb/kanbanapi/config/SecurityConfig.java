@@ -38,8 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/v1/auth", "/v1/customers/save").permitAll()
-                .antMatchers("/v1/customers/{id}", "/v1/boards/{customer-id}",
-                        "/v1/boards/all/{customer-id}", "v1/task-groups/{board-id}", "/v1/task-groups/{id}", "v1/task-groups/all/board/{board-id}").access("hasAuthority('USER')")
+                .antMatchers("/v1/customers/{id}",
+                        "/v1/boards/{customer-id}", "/v1/boards/all/{customer-id}", "/v1/boards/{id}",
+                        "v1/task-groups/{board-id}", "/v1/task-groups/{id}", "v1/task-groups/all/board/{board-id}",
+                        "v1/tasks/{task-group-id}", "v1/tasks/{id}", "v1/tasks/all/task-group-id/{task-group-id}").access("hasAuthority('USER')")
                 .antMatchers("/v1/customers", "/v1/boards", "/v1/task-groups", "/v1/tasks", "/v1/roles/**", "/v1/admin/**" ).access("hasAuthority('ADMIN')")
                 .anyRequest().authenticated().and()
                 .exceptionHandling().authenticationEntryPoint(authEntryPoint)
