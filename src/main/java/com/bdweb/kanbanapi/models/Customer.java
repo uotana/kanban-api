@@ -33,6 +33,9 @@ public class Customer implements UserDetails {
     @ManyToMany(cascade = {CascadeType.DETACH}, fetch = FetchType.EAGER)
     @Column(name = "ROLE", nullable = false)
     private Set<Role> roles;
+    @OneToMany(cascade = {CascadeType.DETACH})
+    @JoinColumn(name="BOARD")
+    private Set<Board> boards;
     @Column(name = "REGISTRATION_DATE", nullable = false)
     private ZonedDateTime registrationDate;
 
