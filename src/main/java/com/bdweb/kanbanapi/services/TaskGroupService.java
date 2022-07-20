@@ -46,6 +46,7 @@ public class TaskGroupService {
     }
 
     public List<TaskGroupResponse> findAllByBoardId(Long boardId) {
+        boardRepository.findById(boardId).orElseThrow(() -> new BoardNotFoundException("Board with id " + boardId + " not found"));
         return taskGroupRepository.findAllByBoardId(boardId)
                 .stream().map(taskGroup -> taskGroup.toResponse()).collect(Collectors.toList());
     }
